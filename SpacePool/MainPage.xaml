@@ -26,7 +26,7 @@
                 </LinearGradientBrush>
             </TextBlock.Foreground>
         </TextBlock>
-        <Image x:Name="image" Source="Assets/deadpool.png" HorizontalAlignment="Left" Height="427" Margin="775,179,0,0" VerticalAlignment="Top" Width="391"/>
+        <Image x:Name="deadpool" Source="Assets/deadpool.png" HorizontalAlignment="Left" Height="427" Margin="775,179,0,0" VerticalAlignment="Top" Width="391"/>
 
     </Grid>
 
