@@ -7,16 +7,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Width="1280"
-    Height="720"
-    >
+    Height="720">
 
     <Grid>
-        
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="StartButton" Content="Start Game" Width="200" Margin="5" Click="StartButton_Click" Background="#332254D8"/>
-            <Button x:Name="InstructionsButton" Content="Instructions" Width="200" Margin="5" Click="InstructionsButton_Click" Background="#332254D8"/>
-            <Button x:Name="ScoreButton" Content="High Scores" Width="200" Margin="5" Click="ScoreButton_Click" Background="#332254D8"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/starsky.jpg"/>
+        </Grid.Background>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="287,284,0,175">
+            <Button x:Name="StartButton" Content="Start Game" Width="290" Margin="10" Click="StartButton_Click" Background="#33532424" Height="77" FontSize="26.667" Foreground="White" BorderBrush="Black"/>
+            <Button x:Name="InstructionsButton" Content="Instructions" Width="290" Margin="10" Click="InstructionsButton_Click" Background="#33532424" Height="77" FontSize="26.667" Foreground="White" BorderBrush="Black"/>
+            <Button x:Name="ScoreButton" Content="High Scores" Width="290" Margin="10" Click="ScoreButton_Click" Background="#33532424" FontSize="26.667" Height="77" Foreground="White" BorderBrush="Black"/>
         </StackPanel>
+        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="SpacePool" Canvas.Top="69" Height="149" Width="575" FontSize="96" FontFamily="Showcard Gothic" FontWeight="Bold" Margin="200,65,505,506">
+            <TextBlock.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FFC34343" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+        </TextBlock>
+        <Image x:Name="deadpool" Source="Assets/deadpool.png" HorizontalAlignment="Left" Height="427" Margin="775,179,0,0" VerticalAlignment="Top" Width="391"/>
+
     </Grid>
 
 
