@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +26,10 @@ namespace SpacePool
         public MainPage()
         {
             this.InitializeComponent();
+
+            ApplicationView.PreferredLaunchWindowingMode
+                = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            ApplicationView.PreferredLaunchViewSize = new Size(1280, 720);
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
