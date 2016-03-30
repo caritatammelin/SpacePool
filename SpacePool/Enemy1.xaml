@@ -6,11 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="180"
+    d:DesignHeight="90"
     d:DesignWidth="100">
 
     <Grid>
-        <Rectangle Width="100" Height="200">
+        <Rectangle Width="50" Height="100">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="Assets/hero_dl.png"
                             Stretch="Fill"

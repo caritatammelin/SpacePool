@@ -130,11 +130,16 @@
     <None Include="SpacePool_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\click.wav" />
+    <Content Include="Assets\spaceambience.wav" />
     <Content Include="Assets\2__deadpool_by_supersanchez-d8qtbhh.gif" />
     <Content Include="Assets\deadpool.png" />
     <Content Include="Assets\galaxies-597905_1920.jpg" />
     <Content Include="Assets\hero_dl.png" />
-    <Content Include="Assets\Katana.png" />
+    <Content Include="Assets\layingdeadpool.png" />
+    <Content Include="Assets\leftkey.png" />
+    <Content Include="Assets\rightkey.png" />
+    <Content Include="Assets\spacekey.png" />
     <Content Include="Assets\starsky.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

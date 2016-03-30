@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,6 +24,7 @@ namespace SpacePool
     /// </summary>
     public sealed partial class ScorePage : Page
     {
+    
         public ScorePage()
         {
             this.InitializeComponent();
@@ -30,6 +32,7 @@ namespace SpacePool
             ApplicationView.PreferredLaunchWindowingMode
                = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.PreferredLaunchViewSize = new Size(1280, 720);
+
         }
 
         private void againButton_Click(object sender, RoutedEventArgs e)

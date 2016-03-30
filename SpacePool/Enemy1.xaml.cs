@@ -35,6 +35,7 @@ namespace SpacePool
             return new Rect(LocationX, LocationY, Width, Height);
         }
 
+
         public void SetLocation()
         {
             SetValue(Canvas.LeftProperty, LocationX);
