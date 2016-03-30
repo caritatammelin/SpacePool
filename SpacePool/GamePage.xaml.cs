@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.System;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -27,6 +28,8 @@ namespace SpacePool
     {
         private Player player;
         private DispatcherTimer timer;
+        private Enemy1 enemy1;
+        
 
         // location
         public double LocationX { get; set; }
@@ -43,6 +46,7 @@ namespace SpacePool
         public GamePage()
         {
             this.InitializeComponent();
+
 
             // change the default startup mode
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
@@ -67,6 +71,15 @@ namespace SpacePool
             };
             // tähän vielä children tavalla pelaajan lisäys peliin
             MyCanvas.Children.Add(player);
+
+            // adding the first enemy
+            enemy1 = new Enemy1
+            {
+                LocationX = 70,
+                LocationY = 250
+            };
+
+            MyCanvas.Children.Add(enemy1);
 
             player.UpdateLocation();
 

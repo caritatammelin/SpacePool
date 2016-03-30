@@ -13,8 +13,8 @@
         <Grid.Background>
             <ImageBrush ImageSource="Assets/starsky.jpg"/>
         </Grid.Background>
-        <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Height="50" Width="100" Margin="1042,624,0,0" VerticalAlignment="Top" Click="backButton_Click" Background="#33532424" BorderBrush="Black" Foreground="White" FontSize="26.667"/>
-        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="SpacePool" Canvas.Top="69" Height="149" Width="575" FontSize="96" FontFamily="Showcard Gothic" FontWeight="Bold" Margin="345,10,360,561">
+        <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Height="50" Width="100" Margin="75,621,0,0" VerticalAlignment="Top" Click="backButton_Click" Background="#33532424" BorderBrush="Black" Foreground="White" FontSize="26.667"/>
+        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="SpacePool" Canvas.Top="-19" Height="66" Width="289" FontSize="48" FontFamily="Showcard Gothic" FontWeight="Bold" Canvas.Left="10" Margin="981,10,10,644">
             <TextBlock.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -22,5 +22,16 @@
                 </LinearGradientBrush>
             </TextBlock.Foreground>
         </TextBlock>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="375,0,0,0" TextWrapping="Wrap" Text="Instructions" VerticalAlignment="Top" Height="122" Width="538" FontFamily="Source Sans Pro Black" FontSize="96" Foreground="White" FontWeight="Bold"/>
+        <Image x:Name="lkey" HorizontalAlignment="Left" Height="100" Margin="100,285,0,0" VerticalAlignment="Top" Width="100" Source="Assets/leftkey.png" RenderTransformOrigin="0.367,-0.647"/>
+        <Image x:Name="rkey" HorizontalAlignment="Left" Height="100" Margin="200,285,0,0" VerticalAlignment="Top" Width="100" Source="Assets/rightkey.png"/>
+        <Image x:Name="skey" HorizontalAlignment="Left" Height="81" Margin="100,410,0,0" VerticalAlignment="Top" Width="222" Source="Assets/spacekey.png"/>
+        <TextBlock x:Name="keyBlock2" HorizontalAlignment="Left" Margin="430,320,0,0" TextWrapping="Wrap" Text="Press the left and right arrow keys to move." VerticalAlignment="Top" Height="44" Width="670" Foreground="White" FontFamily="Source Sans Pro Black" FontSize="32"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="430,425,0,0" TextWrapping="Wrap" Text="Press Spacebar to shoot." VerticalAlignment="Top" Height="44" Width="486" Foreground="White" FontFamily="Source Sans Pro Black" FontSize="32">
+        </TextBlock>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="145" Margin="115,130,0,0" VerticalAlignment="Top" Width="100" Source="Assets/hero_dl.png"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="430,204,0,0" TextWrapping="Wrap" Text="Shoot down enemies to earn points." VerticalAlignment="Top" Height="71" Width="513" Foreground="White" FontFamily="Source Sans Pro Black" FontSize="32"/>
+        <Button x:Name="gameButton" Content="I got it!" HorizontalAlignment="Left" Margin="1006,621,0,0" VerticalAlignment="Top" Height="50" Width="180" FontFamily="Source Sans Pro Black" FontSize="26.667" Background="#33532424" BorderBrush="Black" Foreground="White" Click="gameButton_Click"/>
+        <Image x:Name="laypool" HorizontalAlignment="Left" Height="216" Margin="383,504,0,0" VerticalAlignment="Top" Width="530" Source="Assets/layingdeadpool.png"/>
     </Grid>
 </Page>

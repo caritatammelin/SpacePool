@@ -9,10 +9,10 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Rectangle Width="140" Height="150">
+    <Rectangle Width="55" Height="65">
         <Rectangle.Fill>
             <ImageBrush ImageSource="/Assets/2__deadpool_by_supersanchez-d8qtbhh.gif"
-                        Stretch="None"
+                        Stretch="Fill"
                         AlignmentX="Left"
                         AlignmentY="Top">
                 <ImageBrush.Transform>
