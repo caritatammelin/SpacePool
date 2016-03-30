@@ -100,6 +100,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Bullet.xaml.cs">
+      <DependentUpon>Bullet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Enemy1.xaml.cs">
       <DependentUpon>Enemy1.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,7 @@
     <Content Include="Assets\deadpool.png" />
     <Content Include="Assets\galaxies-597905_1920.jpg" />
     <Content Include="Assets\hero_dl.png" />
+    <Content Include="Assets\Katana.png" />
     <Content Include="Assets\starsky.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -146,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Bullet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Enemy1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

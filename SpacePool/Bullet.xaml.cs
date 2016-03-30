@@ -17,41 +17,34 @@ using Windows.UI.Xaml.Navigation;
 
 namespace SpacePool
 {
-    public sealed partial class Player : UserControl
+    public sealed partial class Bullet : UserControl
     {
-        
-        
-
         // location in x
         public double LocationX { get; set; }
         public double LocationY { get; set; }
 
-        //speed
-        private readonly double MaxSpeed = 50.0;
-        private readonly double Accelerate = 1.0;
-        private double speed;
+        
+        
+        private double speed = 5;
 
-
-        public Player()
+        public Bullet()
         {
             this.InitializeComponent();
-
-            
         }
-
-        public void Move( int direction)
+        public void Move()
         {
             //more speed
-            speed += Accelerate;
-            if (speed > MaxSpeed) speed = MaxSpeed;
-            SetValue(Canvas.TopProperty, LocationY);
             
+           // if (speed > MaxSpeed) speed = MaxSpeed;
+            SetValue(Canvas.TopProperty, LocationY);
+
 
             // update location values
-            LocationX -= 10 * direction;
+            LocationY -= speed * 10;
 
             UpdateLocation();
         }
+
         public void UpdateLocation()
         {
             SetValue(Canvas.LeftProperty, LocationX);

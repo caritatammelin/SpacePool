@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="SpacePool.Player"
+    x:Class="SpacePool.Bullet"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SpacePool"
@@ -7,11 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="300">
 
-    <Rectangle Width="55" Height="60">
+    <!--
+    <Rectangle Width="30" Height="60">
         <Rectangle.Fill>
-            <ImageBrush ImageSource="/Assets/2__deadpool_by_supersanchez-d8qtbhh.gif"
+            <ImageBrush ImageSource="/Assets/katana.png"
                         Stretch="Fill"
                         AlignmentX="Left"
                         AlignmentY="Top">
@@ -21,4 +22,7 @@
             </ImageBrush>
         </Rectangle.Fill>
     </Rectangle>
+    -->
+    <Image Source="Assets/katana.png" Width="30" Height="60"/>
+
 </UserControl>

@@ -27,6 +27,8 @@ namespace SpacePool
     {
         private Player player;
         private DispatcherTimer timer;
+        private DispatcherTimer timer2;
+        //ivate Bullet bullet;
 
         // location
         public double LocationX { get; set; }
@@ -40,6 +42,10 @@ namespace SpacePool
         private bool SpacePressed;
         private bool LeftPressed;
         private bool RightPressed;
+        private bool UpPressed;
+
+        List<Bullet> bullets = new List<Bullet>();
+
         public GamePage()
         {
             this.InitializeComponent();
@@ -61,35 +67,64 @@ namespace SpacePool
             // add player
             player = new Player
             {
-                LocationX = CanvasWidth/2,
-                LocationY = CanvasHeight/2
+            LocationX = CanvasWidth/2,
+            LocationY = 600
             
             };
-            // tähän vielä children tavalla pelaajan lisäys peliin
+
+            
+            
             MyCanvas.Children.Add(player);
 
             player.UpdateLocation();
+            
 
             // game loop
             timer = new DispatcherTimer();
             timer.Tick += Timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             timer.Start();
-        }
 
+            /*// game loop
+            timer2 = new DispatcherTimer();
+            timer2.Tick += Timer2_Tick;
+            timer2.Interval = new TimeSpan(0, 0, 0, 0, 50);
+            timer2.Start();*/
+
+        }
+        /*
+        private void Timer2_Tick(object sender, object e)
+        {
+            
+            
+            if (SpacePressed)
+            {
+                MyCanvas.Children.Add(bullet);
+                SpacePressed = false;
+            }
+            bullet.LocationX++; 
+            
+
+
+        }
+        */
         private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
             switch (args.VirtualKey)
             {
                 case VirtualKey.Left:
-                    LeftPressed = true;
+                    LeftPressed = false;
                     Debug.WriteLine("Left Pressed");
                     break;
                 case VirtualKey.Right:
-                    RightPressed = true;
+                    RightPressed = false;
                     break;
                 case VirtualKey.Space:
-                    SpacePressed = true;
+                    SpacePressed = false;
+                    //Debug.WriteLine("Space");
+                    break;
+                case VirtualKey.Up:
+                    UpPressed = false;
                     break;
                 default:
                     break;
@@ -101,13 +136,16 @@ namespace SpacePool
             switch (args.VirtualKey)
             {
                 case VirtualKey.Left:
-                    LeftPressed = false;
+                    LeftPressed = true;
                     break;
                 case VirtualKey.Right:
-                    RightPressed = false;
+                    RightPressed = true;
                     break;
                 case VirtualKey.Space:
-                    SpacePressed = false;
+                    SpacePressed = true;
+                    break;
+                case VirtualKey.Up:
+                    UpPressed = false;
                     break;
                 default:
                     break;
@@ -117,10 +155,34 @@ namespace SpacePool
         private void Timer_Tick(object sender, object e)
         {
 
-            // move
+            if (SpacePressed)
+            {
+                Bullet bullet = new Bullet
+                    {
+                        LocationX = player.LocationX,
+                        LocationY = player.LocationY
+                    };
+                MyCanvas.Children.Add(bullet);
+                bullets.Add(bullet);
+                
+                SpacePressed = false;
+            }
+            foreach (Bullet bullet in bullets)
+            {
+                bullet.Move();
+                bullet.UpdateLocation();
 
-            if (LeftPressed) player.Move(-1);
-            if (RightPressed) player.Move(1);
+                if (bullet.LocationY < 0)
+                {
+                    bullets.Remove(bullet);
+                    break;
+                }
+                
+            }
+           
+
+            if (LeftPressed) player.Move(1);
+            if (RightPressed) player.Move(-1);
         }
 
         private void CheckCollision()
