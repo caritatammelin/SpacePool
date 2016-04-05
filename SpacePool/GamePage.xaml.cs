@@ -28,6 +28,8 @@ namespace SpacePool
     {
         private Player player;
         private DispatcherTimer timer;
+
+        // enemies
         private List<Enemy1> enemies1;
         private List<Enemy2> enemies2;
 
