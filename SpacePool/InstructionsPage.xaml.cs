@@ -24,7 +24,17 @@ namespace SpacePool
     /// </summary>
     public sealed partial class InstructionsPage : Page
     {
-        
+        private MediaElement clickElement;
+
+        public async void LoadAudio()
+        {
+            clickElement = new MediaElement();
+            clickElement.AutoPlay = false;
+            StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file = await folder.GetFileAsync("click.wav");
+            var stream = await file.OpenAsync(FileAccessMode.Read);
+            clickElement.SetSource(stream, file.ContentType);
+        }
 
         public InstructionsPage()
         {
@@ -34,17 +44,21 @@ namespace SpacePool
                = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.PreferredLaunchViewSize = new Size(1280, 720);
 
+            LoadAudio();
+
         }
 
         // back to the main page
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MainPage));
+            clickElement.Play();
         }
 
         private void gameButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(GamePage));
+            clickElement.Play();
         }
     }
 }

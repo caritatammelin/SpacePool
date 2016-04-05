@@ -106,6 +106,9 @@
     <Compile Include="Enemy1.xaml.cs">
       <DependentUpon>Enemy1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enemy2.xaml.cs">
+      <DependentUpon>Enemy2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\click.wav" />
+    <Content Include="Assets\ajax.gif" />
+    <Content Include="Assets\Katana.png" />
     <Content Include="Assets\spaceambience.wav" />
     <Content Include="Assets\2__deadpool_by_supersanchez-d8qtbhh.gif" />
     <Content Include="Assets\deadpool.png" />
@@ -160,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Enemy1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Enemy2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

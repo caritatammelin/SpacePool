@@ -17,25 +17,26 @@ using Windows.UI.Xaml.Navigation;
 
 namespace SpacePool
 {
-    public sealed partial class Enemy1 : UserControl
+    public sealed partial class Enemy2 : UserControl
     {
         public double LocationX { get; set; }
         public double LocationY { get; set; }
 
-        public Enemy1()
+        public Enemy2()
         {
             this.InitializeComponent();
-            Width = 50;
+            Width = 70;
             Height = 100;
+
         }
-         
-        // rect for enemy1
+
+        // rect for enemy2
         public Rect GetRect()
         {
-            return new Rect(LocationX, LocationY, Width, Height);
+            return new Rect(LocationX, LocationY, Height, Width);
         }
 
-
+        // method to set the enemy on canvas
         public void SetLocation()
         {
             SetValue(Canvas.LeftProperty, LocationX);
