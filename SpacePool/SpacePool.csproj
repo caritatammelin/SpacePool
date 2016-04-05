@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\click.wav" />
+    <Content Include="Assets\Katana.png" />
     <Content Include="Assets\spaceambience.wav" />
     <Content Include="Assets\2__deadpool_by_supersanchez-d8qtbhh.gif" />
     <Content Include="Assets\deadpool.png" />
