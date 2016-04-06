@@ -27,11 +27,14 @@ namespace SpacePool
         private MediaElement mediaElement;
         private MediaElement clickElement;
 
+        
+
         // get background and click audio
         public async void LoadAudio()
         {
             mediaElement = new MediaElement();
             mediaElement.AutoPlay = true;
+            mediaElement.IsLooping = true;
             StorageFolder folder1 = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
             StorageFile file1 = await folder1.GetFileAsync("spaceambience.wav");
             var stream1 = await file1.OpenAsync(FileAccessMode.Read);
@@ -43,6 +46,7 @@ namespace SpacePool
             var stream2 = await file2.OpenAsync(FileAccessMode.Read);
             clickElement.SetSource(stream2, file2.ContentType);
         }
+
         public MainPage()
         {
             this.InitializeComponent();

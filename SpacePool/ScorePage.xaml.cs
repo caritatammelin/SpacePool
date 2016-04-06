@@ -40,13 +40,13 @@ namespace SpacePool
             this.Frame.Navigate(typeof(GamePage));
         }
 
-        public void Main()
+        /*public void Main()
         {
             var scores = ReadScoresFromFile("Highscores.txt");
 
             scores.ForEach(s => Console.WriteLine(s));
 
             Console.ReadKey();
-        }
+        }*/
     }
 }

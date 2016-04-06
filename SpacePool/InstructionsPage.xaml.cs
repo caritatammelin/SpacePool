@@ -24,16 +24,24 @@ namespace SpacePool
     /// </summary>
     public sealed partial class InstructionsPage : Page
     {
+        private MediaElement mediaElement;
         private MediaElement clickElement;
 
         public async void LoadAudio()
         {
+            mediaElement = new MediaElement();
+            mediaElement.AutoPlay = true;
+            mediaElement.IsLooping = true;
+            StorageFolder folder1 = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file1 = await folder1.GetFileAsync("spaceambience.wav");
+            var stream1 = await file1.OpenAsync(FileAccessMode.Read);
+            mediaElement.SetSource(stream1, file1.ContentType);
             clickElement = new MediaElement();
             clickElement.AutoPlay = false;
-            StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
-            StorageFile file = await folder.GetFileAsync("click.wav");
-            var stream = await file.OpenAsync(FileAccessMode.Read);
-            clickElement.SetSource(stream, file.ContentType);
+            StorageFolder folder2 = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file2 = await folder2.GetFileAsync("click.wav");
+            var stream2 = await file2.OpenAsync(FileAccessMode.Read);
+            clickElement.SetSource(stream2, file2.ContentType);
         }
 
         public InstructionsPage()
@@ -45,6 +53,7 @@ namespace SpacePool
             ApplicationView.PreferredLaunchViewSize = new Size(1280, 720);
 
             LoadAudio();
+            mediaElement.Play();
 
         }
 

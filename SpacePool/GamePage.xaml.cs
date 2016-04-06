@@ -33,7 +33,9 @@ namespace SpacePool
         private List<Enemy1> enemies1;
         private List<Enemy2> enemies2;
 
-       
+        // audio
+        private MediaElement mediaElement;
+        private MediaElement shootElement;
 
         // location
         public double LocationX { get; set; }
@@ -79,6 +81,10 @@ namespace SpacePool
             // tähän vielä children tavalla pelaajan lisäys peliin
             MyCanvas.Children.Add(player);
 
+            // load audio elements into game
+            LoadAudio();
+            mediaElement.Play();
+
             CreateEnemies1();
 
             player.UpdateLocation();
@@ -90,6 +96,28 @@ namespace SpacePool
             timer.Start();
         }
 
+        // audio elements
+        public async void LoadAudio()
+        {
+            mediaElement = new MediaElement();
+            mediaElement.AutoPlay = true;
+            mediaElement.IsLooping = true;
+            StorageFolder folder1 = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file1 = await folder1.GetFileAsync("spaceambience.wav");
+            var stream1 = await file1.OpenAsync(FileAccessMode.Read);
+            mediaElement.SetSource(stream1, file1.ContentType);
+            // shooting sound
+            shootElement = new MediaElement();
+            shootElement.AutoPlay = false;
+            shootElement.IsHoldingEnabled = true;
+            StorageFolder folder2 = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file2 = await folder2.GetFileAsync("shoot.wav");
+            var stream2 = await file2.OpenAsync(FileAccessMode.Read);
+            shootElement.SetSource(stream2, file2.ContentType);
+
+        }
+
+        // creating first kind enemies as a list
         private void CreateEnemies1()
         {
             enemies1 = new List<Enemy1>();
@@ -177,6 +205,8 @@ namespace SpacePool
                 };
                 MyCanvas.Children.Add(bullet);
                 bullets.Add(bullet);
+                // shoot sound when shooting
+                shootElement.Play();
 
                 SpacePressed = false;
             }
