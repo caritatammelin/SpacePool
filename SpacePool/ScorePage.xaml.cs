@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -33,11 +34,20 @@ namespace SpacePool
                = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.PreferredLaunchViewSize = new Size(1280, 720);
 
+            XmlDocument xdoc = new XmlDocument();
+            //xdoc.LoadXml();
+            //xdoc.Save("scores.xml");
+
         }
 
         private void againButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(GamePage));
+        }
+
+        private void scoreBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            
         }
 
         /*public void Main()

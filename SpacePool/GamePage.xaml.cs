@@ -41,7 +41,7 @@ namespace SpacePool
         public double LocationX { get; set; }
         public double LocationY { get; set; }
 
-        // canvas width and height (used to randomize a new flower)
+        // canvas width and height
         private double CanvasWidth;
         private double CanvasHeight;
 
@@ -122,7 +122,7 @@ namespace SpacePool
         {
             enemies1 = new List<Enemy1>();
             int enemy1Count = 20;
-            int cols = 4;
+            int cols = 10;
             int xStartPos = 55;
             int yStartPos = 50;
             int step = 5;
@@ -141,7 +141,7 @@ namespace SpacePool
                     col++;
                 }
                 int x = (55 + step) * col + xStartPos;
-                int y = (105 + step) * col + yStartPos;
+                int y = (105 + step) * row + yStartPos;
 
                 Enemy1 enemy1 = new Enemy1
                 {
@@ -222,6 +222,7 @@ namespace SpacePool
                 }
 
             }
+           
 
 
             if (LeftPressed) player.Move(1);
