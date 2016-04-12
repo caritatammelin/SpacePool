@@ -51,6 +51,8 @@ namespace SpacePool
             LocationX -= 10 * direction;
 
             UpdateLocation();
+
+            
         }
         public void UpdateLocation()
         {
