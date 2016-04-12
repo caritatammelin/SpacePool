@@ -40,8 +40,9 @@ namespace SpacePool
         // location
         public double LocationX { get; set; }
         public double LocationY { get; set; }
+        
 
-        // canvas width and height
+        // canvas width and height (used to randomize a new flower)
         private double CanvasWidth;
         private double CanvasHeight;
 
@@ -118,10 +119,10 @@ namespace SpacePool
         }
 
         // creating first kind enemies as a list
-        private void CreateEnemies1()
+        public void CreateEnemies1()
         {
             enemies1 = new List<Enemy1>();
-            int enemy1Count = 20;
+            int enemy1Count = 40;
             int cols = 10;
             int xStartPos = 55;
             int yStartPos = 50;
@@ -134,6 +135,7 @@ namespace SpacePool
                 if (i % cols == 0 && i > 0)
                 {
                     row++;
+                    Debug.WriteLine("COL");
                     col = 0;
                 }
                 else if (i > 0)
@@ -142,6 +144,7 @@ namespace SpacePool
                 }
                 int x = (55 + step) * col + xStartPos;
                 int y = (105 + step) * row + yStartPos;
+                Debug.WriteLine(x + " " + y);
 
                 Enemy1 enemy1 = new Enemy1
                 {
@@ -151,6 +154,7 @@ namespace SpacePool
                 enemies1.Add(enemy1);
                 MyCanvas.Children.Add(enemy1);
                 enemy1.SetLocation();
+                
             }
         }
         private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
@@ -184,6 +188,7 @@ namespace SpacePool
                     break;
                 case VirtualKey.Space:
                     SpacePressed = true;
+                    Debug.WriteLine("Testi");
                     break;
                 case VirtualKey.Up:
                     SpacePressed = false;
@@ -192,7 +197,7 @@ namespace SpacePool
                     break;
             }
         }
-
+        
         private void Timer_Tick(object sender, object e)
         {
 
@@ -209,29 +214,88 @@ namespace SpacePool
                 shootElement.Play();
 
                 SpacePressed = false;
+                
             }
             foreach (Bullet bullet in bullets)
             {
                 bullet.Move();
                 bullet.UpdateLocation();
 
-                if (bullet.LocationY < 0)
+                if (bullet.LocationY < -5)
                 {
                     bullets.Remove(bullet);
                     break;
                 }
 
             }
-           
 
-
-            if (LeftPressed) player.Move(1);
+            /*
+            foreach (Enemy1 enemies in enemies1)
+            {
+                e1x = enemies.LocationX;
+                e1y = enemies.LocationY;
+                e1aw = enemies.ActualWidth;
+                e1ah = enemies.ActualHeight;
+            }
+            */
+                if (LeftPressed) player.Move(1);
             if (RightPressed) player.Move(-1);
+
+            if (player.LocationX < -1) player.LocationX = 1270;
+            if (player.LocationX > 1279) player.LocationX = 1;
+
+            CheckCollision();
+
+
         }
 
         private void CheckCollision()
         {
+            double bx = 0;
+            double by = 0;
+            double baw = 0;
+            double bah = 0;
 
+            double e1x = 0;
+            double e1y = 0;
+            double e1aw = 0;
+            double e1ah = 0;
+
+            SpacePool.Enemy1 viholline = null;
+            SpacePool.Bullet ammus = null;
+
+            foreach (Bullet bullet in bullets)
+            {
+                bx = bullet.LocationX;
+                by = bullet.LocationY;
+                baw = bullet.ActualWidth;
+                bah = bullet.ActualHeight;
+                ammus = bullet;
+
+
+                foreach (Enemy1 enemies in enemies1)
+                {
+                    e1x = enemies.LocationX;
+                    e1y = enemies.LocationY;
+                    e1aw = enemies.ActualWidth;
+                    e1ah = enemies.ActualHeight;
+                    viholline = enemies;
+
+
+                    Rect r1 = new Rect(bx, by, baw, bah);
+                    Rect r2 = new Rect(e1x, e1y, e1aw, e1ah);
+
+                    r1.Intersect(r2);
+
+                    if (!r1.IsEmpty)
+                    {
+                        //Debug.WriteLine("nononon");
+                        MyCanvas.Children.Remove(ammus);
+                        MyCanvas.Children.Remove(viholline);
+                        
+                    }
+                }
+            }
         }
         
     }
