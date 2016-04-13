@@ -25,8 +25,8 @@ namespace SpacePool
         public Enemy1()
         {
             this.InitializeComponent();
-            Width = 50;
-            Height = 100;
+            Width = 25;
+            Height = 50;
         }
 
        
