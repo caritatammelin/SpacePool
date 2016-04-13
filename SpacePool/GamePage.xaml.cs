@@ -27,11 +27,16 @@ namespace SpacePool
     public sealed partial class GamePage : Page
     {
         private Player player;
+        private Enemy1 enemy1;
         private DispatcherTimer timer;
+        private DispatcherTimer etimer;
+        private DispatcherTimer gametimer;
 
         // enemies
         private List<Enemy1> enemies1;
         private List<Enemy2> enemies2;
+        SpacePool.Enemy1 viholline = null;
+        SpacePool.Bullet ammus = null;
 
         // audio
         private MediaElement mediaElement;
@@ -95,7 +100,29 @@ namespace SpacePool
             timer.Tick += Timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             timer.Start();
+
+            etimer = new DispatcherTimer();
+            etimer.Tick += Timer_Tick1;
+            etimer.Interval = new TimeSpan(0, 0, 1);
+            etimer.Start();
+
+            gametimer = new DispatcherTimer();
+            gametimer.Tick += Gametimer_Tick;
+            gametimer.Interval = new TimeSpan(0, 0, 20);
+            gametimer.Start();
         }
+
+        private void Gametimer_Tick(object sender, object e)
+        {
+            
+            foreach (Enemy1 enemies in enemies1)
+            {
+                 MyCanvas.Children.Remove(enemies);
+            }
+            enemies1.Clear();
+            CreateEnemies1();
+        }
+        
 
         // audio elements
         public async void LoadAudio()
@@ -144,7 +171,7 @@ namespace SpacePool
                 }
                 int x = (55 + step) * col + xStartPos;
                 int y = (105 + step) * row + yStartPos;
-                Debug.WriteLine(x + " " + y);
+               // Debug.WriteLine(x + " " + y);
 
                 Enemy1 enemy1 = new Enemy1
                 {
@@ -157,6 +184,23 @@ namespace SpacePool
                 
             }
         }
+
+        private void Timer_Tick1(object sender, object e)
+        {
+            foreach (Enemy1 enemies in enemies1)
+            {
+                viholline = enemies;
+                if (viholline.LocationX < 1000)
+                    viholline.LocationX = viholline.LocationX + 100;
+                else if (viholline.LocationX > 1000)
+                    viholline.LocationX = 60;
+                viholline.SetLocation();
+            }
+
+            
+        }
+
+        
         private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
             switch (args.VirtualKey)
@@ -209,7 +253,8 @@ namespace SpacePool
                     LocationY = player.LocationY
                 };
                 MyCanvas.Children.Add(bullet);
-                bullets.Add(bullet);
+                if (bullets.Count == 0)
+                    bullets.Add(bullet);
                 // shoot sound when shooting
                 shootElement.Play();
 
@@ -229,16 +274,10 @@ namespace SpacePool
 
             }
 
-            /*
-            foreach (Enemy1 enemies in enemies1)
-            {
-                e1x = enemies.LocationX;
-                e1y = enemies.LocationY;
-                e1aw = enemies.ActualWidth;
-                e1ah = enemies.ActualHeight;
-            }
-            */
-                if (LeftPressed) player.Move(1);
+
+           // enemy1.SetLocation();
+
+            if (LeftPressed) player.Move(1);
             if (RightPressed) player.Move(-1);
 
             if (player.LocationX < -1) player.LocationX = 1270;
@@ -261,8 +300,7 @@ namespace SpacePool
             double e1aw = 0;
             double e1ah = 0;
 
-            SpacePool.Enemy1 viholline = null;
-            SpacePool.Bullet ammus = null;
+            
 
             foreach (Bullet bullet in bullets)
             {
@@ -292,7 +330,10 @@ namespace SpacePool
                         //Debug.WriteLine("nononon");
                         MyCanvas.Children.Remove(ammus);
                         MyCanvas.Children.Remove(viholline);
-                        
+
+                        bullets.Remove(ammus);
+                        enemies1.Remove(viholline);
+                        return;
                     }
                 }
             }

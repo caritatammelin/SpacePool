@@ -28,13 +28,9 @@ namespace SpacePool
             Width = 50;
             Height = 100;
         }
-         
-        // rect for enemy1
-        public Rect GetRect()
-        {
-            return new Rect(LocationX, LocationY, Width, Height);
-        }
 
+       
+        
 
         public void SetLocation()
         {
