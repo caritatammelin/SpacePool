@@ -14,7 +14,6 @@
             <ImageBrush ImageSource="Assets/starsky.jpg"/>
         </Grid.Background>
         <Button x:Name="againButton" Content="Play Again" HorizontalAlignment="Left" Height="61" Width="172" Margin="40,630,0,0" VerticalAlignment="Top" Background="#33532424" BorderBrush="Black" Foreground="White" FontSize="26.667" Click="againButton_Click" />
-        <TextBlock x:Name="scoreBlock" HorizontalAlignment="Left" Margin="175,154,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="385" Width="879" SelectionChanged="scoreBlock_SelectionChanged"/>
         <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="SpacePool" Canvas.Top="-19" Height="66" Width="289" FontSize="48" FontFamily="Showcard Gothic" FontWeight="Bold" Canvas.Left="10" Margin="10,0,981,654">
             <TextBlock.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -23,6 +22,14 @@
                 </LinearGradientBrush>
             </TextBlock.Foreground>
         </TextBlock>
+        <ListView x:Name="ScoresListView" ItemsSource="{x:Bind Scores}">
+            <DataTemplate>
+                <StackPanel HorizontalAlignment="Center" Margin="100" Orientation="Vertical">
+                    <TextBlock Text="{x:Bind Name}"/>
+                 <TextBlock Text="{x:Bind Score}"/>
+                </StackPanel>
+            </DataTemplate>
+        </ListView>
         <TextBlock x:Name="titleBlock" HorizontalAlignment="Left" Margin="413,10,0,0" TextWrapping="Wrap" Text="Highscores" VerticalAlignment="Top" Height="139" RenderTransformOrigin="0.225,-0.384" Width="641" FontSize="96" FontFamily="Source Sans Pro Black" FontWeight="Bold">
             <TextBlock.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -31,5 +38,6 @@
                 </LinearGradientBrush>
             </TextBlock.Foreground>
         </TextBlock>
+        <Image x:Name="clapclap" HorizontalAlignment="Left" Height="207" Margin="919,518,0,-5" VerticalAlignment="Top" Width="361" Source="Assets/clapclap.jpg"/>
     </Grid>
 </Page>
