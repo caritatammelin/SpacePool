@@ -417,6 +417,7 @@ namespace SpacePool
                 if (bullets.Count == 0)
                     bullets.Add(bullet);
                 // shoot sound when shooting
+                shootElement.Stop();
                 shootElement.Play();
 
                 SpacePressed = false;
