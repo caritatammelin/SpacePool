@@ -10,7 +10,7 @@
     d:DesignWidth="100">
 
     <Grid>
-        <Rectangle Width="50" Height="100">
+        <Rectangle Width = "25" Height = "50">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="Assets/hero_dl.png"
                             Stretch="Fill"

@@ -27,11 +27,18 @@ namespace SpacePool
     public sealed partial class GamePage : Page
     {
         private Player player;
+        private Enemy1 enemy1;
         private DispatcherTimer timer;
+        private DispatcherTimer etimer;
+        private DispatcherTimer gametimer;
 
         // enemies
         private List<Enemy1> enemies1;
         private List<Enemy2> enemies2;
+        private List<Enemy1> enemies3;
+        private List<Enemy2> enemies4;
+        SpacePool.Enemy1 viholline = null;
+        SpacePool.Bullet ammus = null;
 
         // audio
         private MediaElement mediaElement;
@@ -50,7 +57,7 @@ namespace SpacePool
         private bool SpacePressed;
         private bool LeftPressed;
         private bool RightPressed;
-        private bool UpPressed;
+        
 
         List<Bullet> bullets = new List<Bullet>();
         public GamePage()
@@ -87,6 +94,9 @@ namespace SpacePool
             mediaElement.Play();
 
             CreateEnemies1();
+            CreateEnemies2();
+            CreateEnemies3();
+            CreateEnemies4();
 
             player.UpdateLocation();
 
@@ -95,7 +105,50 @@ namespace SpacePool
             timer.Tick += Timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             timer.Start();
+
+            etimer = new DispatcherTimer();
+            etimer.Tick += Timer_Tick1;
+            etimer.Interval = new TimeSpan(0, 0, 0,0,1000/10);
+            etimer.Start();
+
+            gametimer = new DispatcherTimer();
+            gametimer.Tick += Gametimer_Tick;
+            gametimer.Interval = new TimeSpan(0, 0, 40);
+            gametimer.Start();
         }
+
+        private void Gametimer_Tick(object sender, object e)
+        {
+            
+            foreach (Enemy1 enemies in enemies1)
+            {
+                 MyCanvas.Children.Remove(enemies);
+            }
+
+            foreach (Enemy2 enemies in enemies2)
+            {
+                MyCanvas.Children.Remove(enemies);
+            }
+
+            foreach (Enemy1 enemies in enemies3)
+            {
+                MyCanvas.Children.Remove(enemies);
+            }
+
+            foreach (Enemy2 enemies in enemies4)
+            {
+                MyCanvas.Children.Remove(enemies);
+            }
+            enemies4.Clear();
+            enemies3.Clear();
+            enemies2.Clear();
+            enemies1.Clear();
+            CreateEnemies1();
+            CreateEnemies2();
+            CreateEnemies3();
+            CreateEnemies4();
+        }
+        
 
         // audio elements
         public async void LoadAudio()
@@ -123,7 +176,7 @@ namespace SpacePool
         {
             enemies1 = new List<Enemy1>();
             int enemy1Count = 40;
-            int cols = 10;
+            int cols = 20;
             int xStartPos = 55;
             int yStartPos = 50;
             int step = 5;
@@ -142,9 +195,9 @@ namespace SpacePool
                 {
                     col++;
                 }
-                int x = (55 + step) * col + xStartPos;
-                int y = (105 + step) * row + yStartPos;
-                Debug.WriteLine(x + " " + y);
+                int x = (35 + step) * col + xStartPos;
+                int y = (60 + step) * row + yStartPos;
+               Debug.WriteLine(x + " " + y);
 
                 Enemy1 enemy1 = new Enemy1
                 {
@@ -157,6 +210,158 @@ namespace SpacePool
                 
             }
         }
+
+        public void CreateEnemies3()
+        {
+            enemies3 = new List<Enemy1>();
+            int enemy3Count = 40;
+            int cols = 20;
+            int xStartPos = 55;
+            int yStartPos = 290;
+            int step = 5;
+            int row = 0;
+            int col = 0;
+
+            for (int i = 0; i < enemy3Count; i++)
+            {
+                if (i % cols == 0 && i > 0)
+                {
+                    row++;
+                    Debug.WriteLine("COL");
+                    col = 0;
+                }
+                else if (i > 0)
+                {
+                    col++;
+                }
+                int x = (35 + step) * col + xStartPos;
+                int y = (60 + step) * row + yStartPos;
+                Debug.WriteLine(x + " " + y);
+
+                Enemy1 enemy1 = new Enemy1
+                {
+                    LocationX = x,
+                    LocationY = y
+                };
+                enemies1.Add(enemy1);
+                MyCanvas.Children.Add(enemy1);
+                enemy1.SetLocation();
+
+            }
+        }
+
+        public void CreateEnemies2()
+        {
+            enemies2 = new List<Enemy2>();
+            int enemy2Count = 40;
+            int cols = 20;
+            int xStartPos = 55;
+            int yStartPos = 170;
+            int step = 5;
+            int row = 0;
+            int col = 0;
+
+            for (int i = 0; i < enemy2Count; i++)
+            {
+                if (i % cols == 0 && i > 0)
+                {
+                    row++;
+                    Debug.WriteLine("COL");
+                    col = 0;
+                }
+                else if (i > 0)
+                {
+                    col++;
+                }
+                int x = (35 + step) * col + xStartPos;
+                int y = (60 + step) * row + yStartPos;
+                Debug.WriteLine(x + " " + y);
+
+                Enemy2 enemy2 = new Enemy2
+                {
+                    LocationX = x,
+                    LocationY = y
+                };
+                enemies2.Add(enemy2);
+                MyCanvas.Children.Add(enemy2);
+                enemy2.SetLocation();
+
+            }
+        }
+        
+        public void CreateEnemies4()
+        {
+            enemies4 = new List<Enemy2>();
+            int enemy4Count = 40;
+            int cols = 20;
+            int xStartPos = 55;
+            int yStartPos = 415;
+            int step = 5;
+            int row = 0;
+            int col = 0;
+
+            for (int i = 0; i < enemy4Count; i++)
+            {
+                if (i % cols == 0 && i > 0)
+                {
+                    row++;
+                    Debug.WriteLine("COL");
+                    col = 0;
+                }
+                else if (i > 0)
+                {
+                    col++;
+                }
+                int x = (35 + step) * col + xStartPos;
+                int y = (60 + step) * row + yStartPos;
+                Debug.WriteLine(x + " " + y);
+
+                Enemy2 enemy2 = new Enemy2
+                {
+                    LocationX = x,
+                    LocationY = y
+                };
+                enemies2.Add(enemy2);
+                MyCanvas.Children.Add(enemy2);
+                enemy2.SetLocation();
+
+            }
+        }
+        
+        private void Timer_Tick1(object sender, object e)
+        {
+            foreach (Enemy1 enemies in enemies1)
+            {
+                viholline = enemies;
+                if (viholline.LocationX < 1000)
+                    viholline.LocationX = viholline.LocationX + 5;
+                else if (viholline.LocationX >= 1000)
+                    viholline.LocationX = 60;
+                viholline.SetLocation();
+            }
+
+            foreach (Enemy2 enemies in enemies2)
+            {
+                if (enemies.LocationX < 1000)
+                    enemies.LocationX = enemies.LocationX + 5;
+                else if (enemies.LocationX >= 1000)
+                    enemies.LocationX = 60;
+                enemies.SetLocation();
+            }
+
+            foreach (Enemy1 enemies in enemies3)
+            {
+                if (enemies.LocationX < 1000)
+                    enemies.LocationX = enemies.LocationX + 5;
+                else if (enemies.LocationX >= 1000)
+                    enemies.LocationX = 60;
+                enemies.SetLocation();
+            }
+
+
+        }
+
+        
         private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
             switch (args.VirtualKey)
@@ -209,8 +414,10 @@ namespace SpacePool
                     LocationY = player.LocationY
                 };
                 MyCanvas.Children.Add(bullet);
-                bullets.Add(bullet);
+                if (bullets.Count == 0)
+                    bullets.Add(bullet);
                 // shoot sound when shooting
+                shootElement.Stop();
                 shootElement.Play();
 
                 SpacePressed = false;
@@ -229,16 +436,10 @@ namespace SpacePool
 
             }
 
-            /*
-            foreach (Enemy1 enemies in enemies1)
-            {
-                e1x = enemies.LocationX;
-                e1y = enemies.LocationY;
-                e1aw = enemies.ActualWidth;
-                e1ah = enemies.ActualHeight;
-            }
-            */
-                if (LeftPressed) player.Move(1);
+
+           // enemy1.SetLocation();
+
+            if (LeftPressed) player.Move(1);
             if (RightPressed) player.Move(-1);
 
             if (player.LocationX < -1) player.LocationX = 1270;
@@ -261,8 +462,12 @@ namespace SpacePool
             double e1aw = 0;
             double e1ah = 0;
 
-            SpacePool.Enemy1 viholline = null;
-            SpacePool.Bullet ammus = null;
+            double e2x = 0;
+            double e2y = 0;
+            double e2aw = 0;
+            double e2ah = 0;
+
+
 
             foreach (Bullet bullet in bullets)
             {
@@ -292,7 +497,35 @@ namespace SpacePool
                         //Debug.WriteLine("nononon");
                         MyCanvas.Children.Remove(ammus);
                         MyCanvas.Children.Remove(viholline);
-                        
+
+                        bullets.Remove(ammus);
+                        enemies1.Remove(viholline);
+                        return;
+                    }
+                }
+
+                foreach (Enemy2 enemies in enemies2)
+                {
+                    e2x = enemies.LocationX;
+                    e2y = enemies.LocationY;
+                    e2aw = enemies.ActualWidth;
+                    e2ah = enemies.ActualHeight;
+
+
+                    Rect r1 = new Rect(bx, by, baw, bah);
+                    Rect r2 = new Rect(e2x, e2y, e2aw, e2ah);
+
+                    r1.Intersect(r2);
+
+                    if (!r1.IsEmpty)
+                    {
+                        //Debug.WriteLine("nononon");
+                        MyCanvas.Children.Remove(ammus);
+                        MyCanvas.Children.Remove(enemies);
+
+                        bullets.Remove(ammus);
+                        enemies2.Remove(enemies);
+                        return;
                     }
                 }
             }

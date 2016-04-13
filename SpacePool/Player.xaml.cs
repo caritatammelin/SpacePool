@@ -35,8 +35,6 @@ namespace SpacePool
         public Player()
         {
             this.InitializeComponent();
-
-            
         }
 
         public void Move( int direction)
@@ -51,8 +49,6 @@ namespace SpacePool
             LocationX -= 10 * direction;
 
             UpdateLocation();
-
-            
         }
         public void UpdateLocation()
         {

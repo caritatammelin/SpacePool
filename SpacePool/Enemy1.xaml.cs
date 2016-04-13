@@ -25,16 +25,12 @@ namespace SpacePool
         public Enemy1()
         {
             this.InitializeComponent();
-            Width = 50;
-            Height = 100;
-        }
-         
-        // rect for enemy1
-        public Rect GetRect()
-        {
-            return new Rect(LocationX, LocationY, Width, Height);
+            Width = 25;
+            Height = 50;
         }
 
+       
+        
 
         public void SetLocation()
         {

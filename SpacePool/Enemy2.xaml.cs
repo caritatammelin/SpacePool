@@ -25,16 +25,12 @@ namespace SpacePool
         public Enemy2()
         {
             this.InitializeComponent();
-            Width = 70;
-            Height = 100;
+            Width = 35;
+            Height = 50;
 
         }
 
-        // rect for enemy2
-        public Rect GetRect()
-        {
-            return new Rect(LocationX, LocationY, Height, Width);
-        }
+        
 
         // method to set the enemy on canvas
         public void SetLocation()
