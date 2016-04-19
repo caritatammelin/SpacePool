@@ -22,11 +22,10 @@
                 </LinearGradientBrush>
             </TextBlock.Foreground>
         </TextBlock>
-        <ListView x:Name="ScoresListView" ItemsSource="{x:Bind Scores}">
+        <ListView x:Name="ScoresListView">
             <DataTemplate>
                 <StackPanel HorizontalAlignment="Center" Margin="100" Orientation="Vertical">
-                    <TextBlock Text="{x:Bind Name}"/>
-                 <TextBlock Text="{x:Bind Score}"/>
+                    
                 </StackPanel>
             </DataTemplate>
         </ListView>
