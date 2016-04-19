@@ -9,22 +9,10 @@ namespace SpacePool
 {
    
 
-    class PlayerScore
+    public class PlayerScore
     {
         public string Name { get; set; }
         public int Score { get; set; }
-
-        public ObservableCollection<PlayerScore> PlayScores { get; }
-
-        public PlayerScore()
-        {
-            PlayScores = new ObservableCollection<PlayerScore>();
-        }
-
-        public void AddScore(PlayerScore score)
-        {
-            PlayScores.Add(score);
-        }
 
     }
 }

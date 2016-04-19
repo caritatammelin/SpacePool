@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:data="using:SpacePool"
     Width="1280"
     Height="720">
 
@@ -22,13 +23,15 @@
                 </LinearGradientBrush>
             </TextBlock.Foreground>
         </TextBlock>
-        <ListView x:Name="ScoresListView" ItemsSource="{x:Bind Scores}">
-            <DataTemplate>
-                <StackPanel HorizontalAlignment="Center" Margin="100" Orientation="Vertical">
-                    <TextBlock Text="{x:Bind Name}"/>
-                 <TextBlock Text="{x:Bind Score}"/>
-                </StackPanel>
-            </DataTemplate>
+        <ListView x:Name="ScoresListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" Foreground="#FFFBFBFB" FontFamily="Source Sans Pro Black" FontSize="24"/>
+                        <TextBlock Text="{Binding Score}" FontFamily="Source Sans Pro Black" FontSize="24" Foreground="White"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <TextBlock x:Name="titleBlock" HorizontalAlignment="Left" Margin="413,10,0,0" TextWrapping="Wrap" Text="Highscores" VerticalAlignment="Top" Height="139" RenderTransformOrigin="0.225,-0.384" Width="641" FontSize="96" FontFamily="Source Sans Pro Black" FontWeight="Bold">
             <TextBlock.Foreground>
@@ -38,6 +41,15 @@
                 </LinearGradientBrush>
             </TextBlock.Foreground>
         </TextBlock>
+
         <Image x:Name="clapclap" HorizontalAlignment="Left" Height="207" Margin="919,518,0,-5" VerticalAlignment="Top" Width="361" Source="Assets/clapclap.jpg"/>
+        <TextBox x:Name="nicknameBox" HorizontalAlignment="Left" Margin="413,630,0,0" TextWrapping="Wrap" Text="Your Name" VerticalAlignment="Top" Width="270" FontFamily="Source Sans Pro Black" FontSize="21.333">
+            <TextBox.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.BorderBrush>
+        </TextBox>
     </Grid>
 </Page>
