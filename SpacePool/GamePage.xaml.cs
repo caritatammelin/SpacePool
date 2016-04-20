@@ -26,11 +26,13 @@ namespace SpacePool
     /// </summary>
     public sealed partial class GamePage : Page
     {
+        private Random rnd = new Random();
         private Player player;
         private Enemy1 enemy1;
         private DispatcherTimer timer;
         private DispatcherTimer etimer;
-        
+        private TextBlock GameOver = new TextBlock();
+
 
         // enemies
         private List<Enemy1> enemies1;
@@ -56,9 +58,10 @@ namespace SpacePool
         private bool LeftPressed;
         private bool RightPressed;
 
-        int score = 0;
+        public int score = 0;
 
         List<Bullet> bullets = new List<Bullet>();
+        List<EnemyBullet> enemyBullets = new List<EnemyBullet>();
         public GamePage()
         {
             this.InitializeComponent();
@@ -161,7 +164,7 @@ namespace SpacePool
                 }
                 int x = (45 + step) * col + xStartPos;
                 int y = (60 + step) * row + yStartPos;
-               Debug.WriteLine(x + " " + y);
+               //Debug.WriteLine(x + " " + y);
 
                 Enemy1 enemy1 = new Enemy1
                 {
@@ -200,7 +203,7 @@ namespace SpacePool
                 }
                 int x = (95 + step) * col + xStartPos;
                 int y = (120 + step) * row + yStartPos;
-                Debug.WriteLine(x + " " + y);
+                //Debug.WriteLine(x + " " + y);
 
                 Enemy2 enemy2 = new Enemy2
                 {
@@ -238,16 +241,6 @@ namespace SpacePool
                 dir = dir * -1;
                 iii = 0;
             }
-
-            /*foreach (Enemy1 enemies in enemies1)
-            {
-                viholline = enemies;
-                if (viholline.LocationY < 500)
-                    viholline.LocationY = viholline.LocationY + 1.5;
-                else if (viholline.LocationY >= 500)
-                    viholline.LocationY = 55;
-                viholline.SetLocation();
-            }*/
 
             foreach (Enemy2 enemies in enemies2)
             {
@@ -303,10 +296,49 @@ namespace SpacePool
                     break;
             }
         }
-        
+        private void ScoreButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(ScorePage));
+        }
+        int end = 0;
         private void Timer_Tick(object sender, object e)
         {
+            if (end == 1)
+            {
+                Popup1.IsOpen = true;
+                timer.Stop();
+                etimer.Stop();
+                High.IsOpen = true;
+
+            }
+
+
             scoreBlock.Text = Convert.ToString(score);
+
+            if (enemyBullets.Count < 4)
+            {
+                int r = rnd.Next(enemies1.Count);
+                Enemy1 enemy = enemies1[r];
+                EnemyBullet ebullet = new EnemyBullet
+                {
+                    LocationX = enemy.LocationX,
+                    LocationY = enemy.LocationY
+                };
+                MyCanvas.Children.Add(ebullet);
+                enemyBullets.Add(ebullet);
+                score = score + 1;
+            }
+            foreach (EnemyBullet ebullet in enemyBullets)
+            {
+                ebullet.UpdateLocation();
+                ebullet.Move();
+                if (ebullet.LocationY > 750)
+                {
+                    enemyBullets.Remove(ebullet);
+                    break;
+                }
+            }
+            
             if (SpacePressed)
             {
                 Bullet bullet = new Bullet
@@ -368,7 +400,32 @@ namespace SpacePool
             double e2aw = 0;
             double e2ah = 0;
 
-            
+            double ebx = 0;
+            double eby = 0;
+            double ebaw = 0;
+            double ebah = 0;
+            Debug.WriteLine(player.LocationX);
+            Debug.WriteLine(player.LocationY);
+            foreach (EnemyBullet ebullet in enemyBullets)
+            {
+                ebx = ebullet.LocationX;
+                eby = ebullet.LocationY;
+                ebaw = ebullet.ActualWidth;
+                ebah = ebullet.ActualHeight;
+
+                Rect r1 = new Rect(ebx, eby, ebaw, ebah);
+                Rect r2 = new Rect(player.LocationX, player.LocationY, player.ActualWidth, player.ActualHeight);
+
+                r1.Intersect(r2);
+
+                if (!r1.IsEmpty)
+                {
+                    Debug.WriteLine("noooooo");
+                    MyCanvas.Children.Remove(player);
+                    end = 1;
+                    return;
+                }
+            }
 
             foreach (Bullet bullet in bullets)
             {
@@ -427,6 +484,7 @@ namespace SpacePool
 
                         bullets.Remove(ammus);
                         enemies2.Remove(enemies);
+                        score = score + 200;
                         return;
                     }
                 }
