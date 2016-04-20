@@ -140,6 +140,8 @@
     <Content Include="Assets\click.wav" />
     <Content Include="Assets\ajax.gif" />
     <Content Include="Assets\clapclap.jpg" />
+    <Content Include="Assets\explosion.mp3" />
+    <Content Include="Assets\gameover.mp3" />
     <Content Include="Assets\Glenos-G_160_bullet.png" />
     <Content Include="Assets\Katana.png" />
     <Content Include="Assets\shoot.wav" />

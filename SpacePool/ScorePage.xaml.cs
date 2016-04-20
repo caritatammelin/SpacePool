@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -33,7 +34,7 @@ namespace SpacePool
 
         private ObservableCollection<PlayerScore> scores = new ObservableCollection<PlayerScore>();
 
- 
+        private int score;
     
         public ScorePage()
         {
@@ -100,6 +101,21 @@ namespace SpacePool
             clickElement.Play();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+       
+            if (e.Parameter is int)
+            {
+                Debug.WriteLine("Luku on ="+(int)e.Parameter);
+                score = (int)e.Parameter;
+                scorenumBlock.Text = score.ToString();
+            }
+            base.OnNavigatedFrom(e);
+        }
 
+        private void addButton_Click(object sender, RoutedEventArgs e)
+        {
+            scores.Add(new PlayerScore { Name = nicknameBox.Text, Score = score });
+        }
     }
 }

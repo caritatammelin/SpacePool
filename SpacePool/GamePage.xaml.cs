@@ -43,6 +43,10 @@ namespace SpacePool
         // audio
         private MediaElement mediaElement;
         private MediaElement shootElement;
+        private MediaElement destroyElement;
+        private MediaElement gameoverElement;
+        private MediaElement enshootElement;
+        private MediaElement clickElement;
 
         // location
         public double LocationX { get; set; }
@@ -130,12 +134,24 @@ namespace SpacePool
             // shooting sound
             shootElement = new MediaElement();
             shootElement.AutoPlay = false;
-            shootElement.IsHoldingEnabled = true;
             StorageFolder folder2 = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
             StorageFile file2 = await folder2.GetFileAsync("shoot.wav");
             var stream2 = await file2.OpenAsync(FileAccessMode.Read);
             shootElement.SetSource(stream2, file2.ContentType);
-
+            // sound of enemies being destroyed
+            destroyElement = new MediaElement();
+            destroyElement.AutoPlay = false;
+            StorageFolder folder3 = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file3 = await folder3.GetFileAsync("explosion.mp3");
+            var stream3 = await file3.OpenAsync(FileAccessMode.Read);
+            destroyElement.SetSource(stream3, file3.ContentType);
+            // game over sound
+            gameoverElement = new MediaElement();
+            gameoverElement.AutoPlay = false;
+            StorageFolder folder4 = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file4 = await folder4.GetFileAsync("gameover.mp3");
+            var stream4 = await file4.OpenAsync(FileAccessMode.Read);
+            gameoverElement.SetSource(stream4, file4.ContentType);
         }
 
         // creating first kind enemies as a list
@@ -298,13 +314,16 @@ namespace SpacePool
         }
         private void ScoreButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ScorePage));
+            this.Frame.Navigate(typeof(ScorePage), score);
+            // clickElement.Play();
         }
         int end = 0;
         private void Timer_Tick(object sender, object e)
         {
             if (end == 1)
             {
+                // game over sound
+                gameoverElement.Play();
                 Popup1.IsOpen = true;
                 timer.Stop();
                 etimer.Stop();
@@ -452,6 +471,9 @@ namespace SpacePool
 
                     if (!r1.IsEmpty)
                     {
+                        // sound of destruction
+                        destroyElement.Stop();
+                        destroyElement.Play();
                         //Debug.WriteLine("nononon");
                         MyCanvas.Children.Remove(ammus);
                         MyCanvas.Children.Remove(viholline);
@@ -479,6 +501,9 @@ namespace SpacePool
                     if (!r1.IsEmpty)
                     {
                         //Debug.WriteLine("nononon");
+                        // sound of destruction
+                        destroyElement.Stop();
+                        destroyElement.Play();
                         MyCanvas.Children.Remove(ammus);
                         MyCanvas.Children.Remove(enemies);
 
