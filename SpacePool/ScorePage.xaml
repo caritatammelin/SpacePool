@@ -23,15 +23,16 @@
                 </LinearGradientBrush>
             </TextBlock.Foreground>
         </TextBlock>
-        <ListView x:Name="ScoresListView">
+        <ListView x:Name="ScoresListView" Width="864" HorizontalAlignment="Center" VerticalAlignment="Center" Height="337" Margin="190,167,226,167">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Name}" Foreground="#FFFBFBFB" FontFamily="Source Sans Pro Black" FontSize="24"/>
-                        <TextBlock Text="{Binding Score}" FontFamily="Source Sans Pro Black" FontSize="24" Foreground="White"/>
+                    <StackPanel Padding="15" Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" Foreground="#FFFBFBFB" FontFamily="Source Sans Pro Black" FontSize="29.333"/>
+                        <TextBlock Text="{Binding Score}" FontFamily="Source Sans Pro Black" FontSize="29.333" Foreground="White"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+
         </ListView>
         <TextBlock x:Name="titleBlock" HorizontalAlignment="Left" Margin="413,10,0,0" TextWrapping="Wrap" Text="Highscores" VerticalAlignment="Top" Height="139" RenderTransformOrigin="0.225,-0.384" Width="641" FontSize="96" FontFamily="Source Sans Pro Black" FontWeight="Bold">
             <TextBlock.Foreground>
@@ -42,8 +43,8 @@
             </TextBlock.Foreground>
         </TextBlock>
 
-        <Image x:Name="clapclap" HorizontalAlignment="Left" Height="207" Margin="919,518,0,-5" VerticalAlignment="Top" Width="361" Source="Assets/clapclap.jpg"/>
-        <TextBox x:Name="nicknameBox" HorizontalAlignment="Left" Margin="413,630,0,0" TextWrapping="Wrap" Text="Your Name" VerticalAlignment="Top" Width="270" FontFamily="Source Sans Pro Black" FontSize="21.333">
+        <Image x:Name="clapclap" HorizontalAlignment="Left" Height="162" Margin="994,558,0,0" VerticalAlignment="Top" Width="286" Source="Assets/clapclap.jpg"/>
+        <TextBox x:Name="nicknameBox" HorizontalAlignment="Left" Margin="333,630,0,0" TextWrapping="Wrap" Text="Your Name" VerticalAlignment="Top" Width="270" FontFamily="Source Sans Pro Black" FontSize="21.333">
             <TextBox.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -51,5 +52,16 @@
                 </LinearGradientBrush>
             </TextBox.BorderBrush>
         </TextBox>
+        <TextBlock x:Name="scorenumBlock" TextWrapping="Wrap" Text="0" Margin="673,630,366,50" Foreground="White" FontFamily="Source Sans Pro Black" FontSize="29.333"/>
+        <TextBlock x:Name="nameBlock" HorizontalAlignment="Left" Margin="214,147,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Height="59" Width="109" FontSize="32" FontFamily="Source Sans Pro Black">
+            <TextBlock.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+        </TextBlock>
+        <TextBlock x:Name="firstBlock" HorizontalAlignment="Left" Margin="150,208,0,0" TextWrapping="Wrap" Text="1." VerticalAlignment="Top" Height="43" RenderTransformOrigin="1.983,1.62" Width="40" Foreground="White" FontFamily="Source Sans Pro Black" FontSize="29.333"/>
+        <TextBlock x:Name="secondBlock" HorizontalAlignment="Left" Margin="150,275,0,0" TextWrapping="Wrap" Text="2." VerticalAlignment="Top" Height="43" RenderTransformOrigin="1.983,1.62" Width="40" Foreground="White" FontFamily="Source Sans Pro Black" FontSize="29.333"/>
     </Grid>
 </Page>

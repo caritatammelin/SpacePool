@@ -38,16 +38,15 @@ namespace SpacePool
         public ScorePage()
         {
             this.InitializeComponent();
-            //PlayerScore score = new PlayerScore { Name = "Ajax", Score = 10000 };
            
-
-           scores.Add(new PlayerScore { Name = "Ajax", Score = 10000 });
+            // add player scores to the list
+            scores.Add(new PlayerScore { Name = "Ajax", Score = 1000000 });
             scores.Add(new PlayerScore { Name = "Angel Dust", Score = 8000 });
-            scores.Add(new PlayerScore { Name = "Colossus", Score = 9500 });
-            scores.Add(new PlayerScore { Name = "Negasonic Teenage Warhead", Score = 8500 });
+            scores.Add(new PlayerScore { Name = "Colossus", Score = 95000 });
+            scores.Add(new PlayerScore { Name = "Negasonic Teenage Warhead", Score = 85000 });
+            scores.Add(new PlayerScore { Name = "Deadpool", Score = 980000 });
 
-            //scores.Add(score);
-
+            // show scores 
             ScoresListView.ItemsSource = scores;
 
             ApplicationView.PreferredLaunchWindowingMode
@@ -90,10 +89,10 @@ namespace SpacePool
             scoreFile = await storageFolder.CreateFileAsync("score.dat", Windows.Storage.CreationCollisionOption.OpenIfExists);
         }
 
-       /* private async void ReadFile()
+       private async void ReadFile()
         {
-
-        }*/
+            
+        }
 
         private void againButton_Click(object sender, RoutedEventArgs e)
         {
