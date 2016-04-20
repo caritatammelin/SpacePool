@@ -29,6 +29,8 @@ namespace SpacePool
         private MediaElement mediaElement;
         private MediaElement clickElement;
 
+        private Windows.Storage.StorageFile scoreFile;
+
         private ObservableCollection<PlayerScore> scores = new ObservableCollection<PlayerScore>();
 
  
@@ -36,6 +38,17 @@ namespace SpacePool
         public ScorePage()
         {
             this.InitializeComponent();
+            //PlayerScore score = new PlayerScore { Name = "Ajax", Score = 10000 };
+           
+
+           scores.Add(new PlayerScore { Name = "Ajax", Score = 10000 });
+            scores.Add(new PlayerScore { Name = "Angel Dust", Score = 8000 });
+            scores.Add(new PlayerScore { Name = "Colossus", Score = 9500 });
+            scores.Add(new PlayerScore { Name = "Negasonic Teenage Warhead", Score = 8500 });
+
+            //scores.Add(score);
+
+            ScoresListView.ItemsSource = scores;
 
             ApplicationView.PreferredLaunchWindowingMode
                = ApplicationViewWindowingMode.PreferredLaunchViewSize;
@@ -43,15 +56,11 @@ namespace SpacePool
 
             LoadAudio();
 
-           // list of default scores
-            scores.Add(new PlayerScore { Name = "Ajax", Score = 10000 });
-            scores.Add(new PlayerScore { Name = "Angel Dust", Score = 8000 });
-            scores.Add(new PlayerScore { Name = "Colossus", Score = 9500 });
-            scores.Add(new PlayerScore { Name = "Negasonic Teenage Warhead", Score = 8500 });
+            CreateOrOpenScore();
 
-            
+            // ReadFile();
 
-     
+        
 
 
            // ScoresListView.ItemsSource = Scores;
@@ -75,16 +84,23 @@ namespace SpacePool
         }
 
 
+        private async void CreateOrOpenScore()
+        {
+            Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            scoreFile = await storageFolder.CreateFileAsync("score.dat", Windows.Storage.CreationCollisionOption.OpenIfExists);
+        }
+
+       /* private async void ReadFile()
+        {
+
+        }*/
+
         private void againButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(GamePage));
             clickElement.Play();
         }
 
-        private void scoreBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
     }
 }
