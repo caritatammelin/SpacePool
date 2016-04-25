@@ -42,7 +42,6 @@ namespace SpacePool
 
         // audio
         private MediaElement mediaElement;
-        private MediaElement shootElement;
         private MediaElement destroyElement;
         private MediaElement gameoverElement;
         private MediaElement enshootElement;
@@ -132,12 +131,12 @@ namespace SpacePool
             var stream1 = await file1.OpenAsync(FileAccessMode.Read);
             mediaElement.SetSource(stream1, file1.ContentType);
             // shooting sound
-            shootElement = new MediaElement();
-            shootElement.AutoPlay = false;
+            enshootElement = new MediaElement();
+            enshootElement.AutoPlay = false;
             StorageFolder folder2 = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
             StorageFile file2 = await folder2.GetFileAsync("shoot.wav");
             var stream2 = await file2.OpenAsync(FileAccessMode.Read);
-            shootElement.SetSource(stream2, file2.ContentType);
+            enshootElement.SetSource(stream2, file2.ContentType);
             // sound of enemies being destroyed
             destroyElement = new MediaElement();
             destroyElement.AutoPlay = false;
@@ -152,6 +151,14 @@ namespace SpacePool
             StorageFile file4 = await folder4.GetFileAsync("gameover.mp3");
             var stream4 = await file4.OpenAsync(FileAccessMode.Read);
             gameoverElement.SetSource(stream4, file4.ContentType);
+            // click sound
+            clickElement = new MediaElement();
+            clickElement.AutoPlay = false;
+            StorageFolder folder5 = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file5 = await folder5.GetFileAsync("click.wav");
+            var stream5 = await file5.OpenAsync(FileAccessMode.Read);
+            clickElement.SetSource(stream5, file5.ContentType);
+
         }
 
         // creating first kind enemies as a list
@@ -315,15 +322,14 @@ namespace SpacePool
         private void ScoreButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(ScorePage), score);
-            // clickElement.Play();
+            clickElement.Play();
         }
         int end = 0;
         private void Timer_Tick(object sender, object e)
         {
             if (end == 1)
             {
-                // game over sound
-                gameoverElement.Play();
+                
                 Popup1.IsOpen = true;
                 timer.Stop();
                 etimer.Stop();
@@ -351,6 +357,9 @@ namespace SpacePool
             {
                 ebullet.UpdateLocation();
                 ebullet.Move();
+                // enemy shoot sound
+                enshootElement.Stop();
+                enshootElement.Play();
                 if (ebullet.LocationY > 750)
                 {
                     enemyBullets.Remove(ebullet);
@@ -368,9 +377,6 @@ namespace SpacePool
                 MyCanvas.Children.Add(bullet);
                 if (bullets.Count == 0)
                     bullets.Add(bullet);
-                // shoot sound when shooting
-                shootElement.Stop();
-                shootElement.Play();
 
                 SpacePressed = false;
                 
@@ -440,6 +446,8 @@ namespace SpacePool
                 if (!r1.IsEmpty)
                 {
                     Debug.WriteLine("noooooo");
+                    // game over sound
+                    gameoverElement.Play();
                     MyCanvas.Children.Remove(player);
                     end = 1;
                     return;

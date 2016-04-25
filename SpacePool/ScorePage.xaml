@@ -14,7 +14,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="Assets/starsky.jpg"/>
         </Grid.Background>
-        <Button x:Name="againButton" Content="Play Again" HorizontalAlignment="Left" Height="61" Width="172" Margin="40,630,0,0" VerticalAlignment="Top" Background="#33532424" BorderBrush="Black" Foreground="White" FontSize="26.667" Click="againButton_Click" />
+        <Button x:Name="againButton" Content="Play Again" HorizontalAlignment="Left" Height="61" Width="172" Margin="53,629,0,0" VerticalAlignment="Top" Background="#33532424" BorderBrush="Black" Foreground="White" FontSize="26.667" Click="againButton_Click" />
         <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="SpacePool" Canvas.Top="-19" Height="66" Width="289" FontSize="48" FontFamily="Showcard Gothic" FontWeight="Bold" Canvas.Left="10" Margin="10,0,981,654">
             <TextBlock.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -44,7 +44,7 @@
         </TextBlock>
 
         <Image x:Name="clapclap" HorizontalAlignment="Left" Height="162" Margin="994,558,0,0" VerticalAlignment="Top" Width="286" Source="Assets/clapclap.jpg"/>
-        <TextBox x:Name="nicknameBox" HorizontalAlignment="Left" Margin="333,630,0,0" TextWrapping="Wrap" Text="Your Name" VerticalAlignment="Top" Width="270" FontFamily="Source Sans Pro Black" FontSize="21.333">
+        <TextBox x:Name="nicknameBox" HorizontalAlignment="Left" Margin="291,630,0,0" TextWrapping="Wrap" Text="Your Name" VerticalAlignment="Top" Width="270" FontFamily="Source Sans Pro Black" FontSize="21.333" Height="60">
             <TextBox.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -52,10 +52,10 @@
                 </LinearGradientBrush>
             </TextBox.BorderBrush>
         </TextBox>
-        <TextBlock x:Name="scorenumBlock" TextWrapping="Wrap" Text="0" Margin="673,630,366,50" Foreground="White" FontFamily="Source Sans Pro Black" FontSize="29.333"/>
-        <Button x:Name="addButton" Content="That's Me" Margin="700,630,0,0" Width="70" Height="60" Click="addButton_Click"/> 
+        <TextBlock x:Name="scorenumBlock" TextWrapping="Wrap" Text="0" Margin="604,643,435,37" Foreground="White" FontFamily="Source Sans Pro Black" FontSize="29.333"/>
+        <Button x:Name="addButton" Content="That's Me" Margin="817,633,0,26" Width="172" Height="61" Click="addButton_Click" Foreground="White" FontFamily="Segoe UI Black" FontSize="29.333"/>
         <TextBlock x:Name="nameBlock" HorizontalAlignment="Left" Margin="214,147,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Height="59" Width="109" FontSize="32" FontFamily="Source Sans Pro Black">
-           <TextBlock.Foreground>
+            <TextBlock.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
                     <GradientStop Color="White" Offset="1"/>

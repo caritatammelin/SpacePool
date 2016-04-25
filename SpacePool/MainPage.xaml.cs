@@ -25,7 +25,7 @@ namespace SpacePool
     public sealed partial class MainPage : Page
     {
         private MediaElement mediaElement;
-        private MediaElement clickElement;
+       private MediaElement clickElement;
 
         
 
