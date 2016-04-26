@@ -6,7 +6,6 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -15,21 +14,26 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SpacePool
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class Credits : Page
     {
+        private MediaElement clickElement;
         private MediaElement mediaElement;
-       private MediaElement clickElement;
 
-        
+        public Credits()
+        {
+            this.InitializeComponent();
 
-        // get background and click audio
+            LoadAudio();
+
+            mediaElement.Play();
+        }
         public async void LoadAudio()
         {
             mediaElement = new MediaElement();
@@ -46,38 +50,10 @@ namespace SpacePool
             var stream2 = await file2.OpenAsync(FileAccessMode.Read);
             clickElement.SetSource(stream2, file2.ContentType);
         }
-
-        public MainPage()
+      
+        private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            this.InitializeComponent();
-
-            ApplicationView.PreferredLaunchWindowingMode
-                = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-            ApplicationView.PreferredLaunchViewSize = new Size(1280, 720);
-
-            // load audio elements
-            LoadAudio();
-            // play background audio
-            mediaElement.Play();
-        }
-
-        private void StartButton_Click(object sender, RoutedEventArgs e)
-        {
-            // get to Game Page when clicked
-            this.Frame.Navigate(typeof(GamePage));
-            // play the click sound as the button gets clicked
-            clickElement.Play();
-        }
-
-        private void InstructionsButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(InstructionsPage));
-            clickElement.Play();
-        }
-
-        private void CreditButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(Credits));
+            this.Frame.Navigate(typeof(MainPage));
             clickElement.Play();
         }
     }

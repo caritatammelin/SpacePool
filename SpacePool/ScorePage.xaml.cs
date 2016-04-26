@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpacePool;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -29,9 +30,7 @@ namespace SpacePool
     {
         private MediaElement mediaElement;
         private MediaElement clickElement;
-
-        private Windows.Storage.StorageFile scoreFile;
-
+        
         private ObservableCollection<PlayerScore> scores = new ObservableCollection<PlayerScore>();
 
         private int score;
@@ -44,8 +43,20 @@ namespace SpacePool
             scores.Add(new PlayerScore { Name = "Ajax", Score = 1000000 });
             scores.Add(new PlayerScore { Name = "Angel Dust", Score = 8000 });
             scores.Add(new PlayerScore { Name = "Colossus", Score = 95000 });
-            scores.Add(new PlayerScore { Name = "Negasonic Teenage Warhead", Score = 85000 });
+            scores.Add(new PlayerScore { Name = "Negasonic Teenage Warhead", Score = 8 });
             scores.Add(new PlayerScore { Name = "Deadpool", Score = 980000 });
+
+            //scores.OrderBy(p => p.Score);
+
+            List<PlayerScore> list = scores.ToList();
+            list.Sort((x, y) => x.Score.CompareTo(y.Score));
+            list.Reverse();
+            scores.Clear();
+            foreach (PlayerScore s in list)
+            {
+                scores.Add(s);
+            }
+
 
             // show scores 
             ScoresListView.ItemsSource = scores;
@@ -55,15 +66,6 @@ namespace SpacePool
             ApplicationView.PreferredLaunchViewSize = new Size(1280, 720);
 
             LoadAudio();
-
-            CreateOrOpenScore();
-
-            // ReadFile();
-
-        
-
-
-           // ScoresListView.ItemsSource = Scores;
         }
 
         public async void LoadAudio()
@@ -83,17 +85,6 @@ namespace SpacePool
             clickElement.SetSource(stream2, file2.ContentType);
         }
 
-
-        private async void CreateOrOpenScore()
-        {
-            Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-            scoreFile = await storageFolder.CreateFileAsync("score.dat", Windows.Storage.CreationCollisionOption.OpenIfExists);
-        }
-
-       private async void ReadFile()
-        {
-            
-        }
 
         private void againButton_Click(object sender, RoutedEventArgs e)
         {
@@ -116,6 +107,15 @@ namespace SpacePool
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
             scores.Add(new PlayerScore { Name = nicknameBox.Text, Score = score });
+            List<PlayerScore> list = scores.ToList();
+            list.Sort((x, y) => x.Score.CompareTo(y.Score));
+            list.Reverse();
+            scores.Clear();
+            foreach (PlayerScore s in list)
+            {
+                scores.Add(s);
+            }
         }
+
     }
 }
