@@ -73,11 +73,20 @@ namespace SpacePool
         */
         public void Move()
         {
-            if (LocationY % 0.5 == 0)
-                LocationX = LocationX + 1;
+            if (enemies1.Count > 20)
+            {
+                if (LocationY % 0.5 == 0)
+                    LocationX = LocationX + 1;
+                else
+                    LocationX = LocationX - 1;
+            }
             else
-                LocationX = LocationX - 1;
-
+            {
+                if (LocationY % 0.5 == 0)
+                    LocationX = LocationX + 3;
+                else
+                    LocationX = LocationX - 3;
+            }
             for (int i = 0; i < 8; i++)
             {
                 if (i == 8)

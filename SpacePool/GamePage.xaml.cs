@@ -68,8 +68,7 @@ namespace SpacePool
         public GamePage()
         {
             this.InitializeComponent();
-
-
+            
             // change the default startup mode
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             // specify the size
@@ -100,7 +99,17 @@ namespace SpacePool
 
             CreateEnemies1();
             CreateEnemies2();
-            
+
+            Enemy1 enemy = enemies1[8];
+            EnemyBullet ebullet = new EnemyBullet
+            {
+                LocationX = enemy.LocationX,
+                LocationY = enemy.LocationY
+            };
+
+            MyCanvas.Children.Add(ebullet);
+            enemyBullets.Add(ebullet);
+            score = score + 1;
 
             player.UpdateLocation();
 
@@ -245,34 +254,68 @@ namespace SpacePool
         {
             foreach (Enemy1 enemies in enemies1)
             {
+                if (enemies1.Count < 1)
+                    break;
                 enemies.LocationX = enemies.LocationX + 3*dir;
-                
+                if (enemies1.Count < 20)
+                {
+                    enemies.LocationX = enemies.LocationX + 3 * dir;
+                }
+
+                if (iii > 59)
+                {
+                    enemies.LocationY = enemies.LocationY + 40;
+                }
+
+                if (enemies1.Count < 20)
+                {
+                    if (iii > 29)
+                    {
+                        enemies.LocationY = enemies.LocationY + 40;
+                    }
+                }
+                enemies.SetLocation();
+            }
+            Debug.WriteLine(iii);
+            iii++;
+            if (enemies1.Count < 20)
+            {
+                if (iii > 30)
+                {
+                    dir = dir * -1;
+                    iii = 0;
+                }
+            }
+            else if (enemies1.Count > 20)
+            {
+                if (iii > 60)
+                {
+                    dir = dir * -1;
+                    iii = 0;
+                }
+            }
+
+            foreach (Enemy2 enemies in enemies2)
+            {
+                if (enemies2.Count < 1)
+                    break;
+                enemies.LocationX = enemies.LocationX + 3 * dir;
+                if (enemies1.Count < 20)
+                {
+                    enemies.LocationX = enemies.LocationX + 3 * dir;
+                }
 
                 if (iii > 59)
                 {
                     enemies.LocationY = enemies.LocationY + 40;
 
                 }
-
-                
-                enemies.SetLocation();
-            }
-            Debug.WriteLine(iii);
-            iii++;
-            if (iii > 60)
-            {
-                dir = dir * -1;
-                iii = 0;
-            }
-
-            foreach (Enemy2 enemies in enemies2)
-            {
-                enemies.LocationX = enemies.LocationX + 3 * dir;
-                
-                if (iii > 59)
+                if (enemies1.Count < 20)
                 {
-                    enemies.LocationY = enemies.LocationY + 40;
-
+                    if (iii > 29)
+                    {
+                        enemies.LocationY = enemies.LocationY + 40;
+                    }
                 }
                 enemies.SetLocation();
             }
@@ -329,37 +372,65 @@ namespace SpacePool
         {
             if (end == 1)
             {
-                
+                gameoverElement.Play();
                 Popup1.IsOpen = true;
                 timer.Stop();
                 etimer.Stop();
                 High.IsOpen = true;
+                Again.IsOpen = true;
 
             }
 
 
             scoreBlock.Text = Convert.ToString(score);
 
-            if (enemyBullets.Count < 4)
+            if (enemies1.Count > 20)
             {
-                int r = rnd.Next(enemies1.Count);
-                Enemy1 enemy = enemies1[r];
-                EnemyBullet ebullet = new EnemyBullet
+                if (enemies1.Count < 1)
+                    return;
+                if (enemyBullets.Count < 4)
                 {
-                    LocationX = enemy.LocationX,
-                    LocationY = enemy.LocationY
-                };
-                MyCanvas.Children.Add(ebullet);
-                enemyBullets.Add(ebullet);
-                score = score + 1;
+                    int r = rnd.Next(enemies1.Count);
+                    Enemy1 enemy = enemies1[r];
+                    EnemyBullet ebullet = new EnemyBullet
+                    {
+                        LocationX = enemy.LocationX,
+                        LocationY = enemy.LocationY
+                    };
+
+                    MyCanvas.Children.Add(ebullet);
+                    enemyBullets.Add(ebullet);
+                    score = score + 1;
+                    enshootElement.Stop();
+                    enshootElement.Play();
+                }
+            }
+            else
+            {
+                if (enemyBullets.Count < 2)
+                {
+                    if (enemies1.Count < 1)
+                        return;
+                    int r = rnd.Next(enemies1.Count);
+                    Enemy1 enemy = enemies1[r];
+                    EnemyBullet ebullet = new EnemyBullet
+                    {
+                        LocationX = enemy.LocationX,
+                        LocationY = enemy.LocationY
+                    };
+                    MyCanvas.Children.Add(ebullet);
+                    enemyBullets.Add(ebullet);
+                    score = score + 1;
+                    enshootElement.Stop();
+                    enshootElement.Play();
+                }
             }
             foreach (EnemyBullet ebullet in enemyBullets)
             {
                 ebullet.UpdateLocation();
                 ebullet.Move();
                 // enemy shoot sound
-                enshootElement.Stop();
-                enshootElement.Play();
+                
                 if (ebullet.LocationY > 750)
                 {
                     enemyBullets.Remove(ebullet);
@@ -405,6 +476,8 @@ namespace SpacePool
 
             CheckCollision();
 
+            if (enemies1.Count == 0 && enemies2.Count == 0)
+                end = 1;
 
         }
 
@@ -447,7 +520,7 @@ namespace SpacePool
                 {
                     Debug.WriteLine("noooooo");
                     // game over sound
-                    gameoverElement.Play();
+                    
                     MyCanvas.Children.Remove(player);
                     end = 1;
                     return;
@@ -523,6 +596,11 @@ namespace SpacePool
                 }
             }
         }
-        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(GamePage), score);
+            clickElement.Play();
+        }
     }
 }
