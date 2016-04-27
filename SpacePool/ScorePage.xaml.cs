@@ -28,6 +28,7 @@ namespace SpacePool
     /// </summary>
     public sealed partial class ScorePage : Page
     {
+        // media
         private MediaElement mediaElement;
         private MediaElement clickElement;
         
